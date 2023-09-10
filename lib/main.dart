@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.home),
-        title: const Text("App Bar"),
+        title: const Text("App 2 "),
         systemOverlayStyle: SystemUiOverlayStyle.light,
         actions: [
           CupertinoButton(
@@ -52,10 +52,39 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Center(
-        child: MiComponente(
-          label: 'El contador es: $contador',
-          onTap: sumar,
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 700,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                    50,
+                    (index) => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      width: 32,
+                      height: 32,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 64,
+            ),
+            MiComponente(
+              label: 'El contador es: $contador',
+              onTap: sumar,
+            ),
+          ],
         ),
       ),
     );
@@ -78,15 +107,6 @@ class MiComponente extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           color: Color(0xFF1E415F),
-          // border: Border.all(color: Colors.red, width: 40),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              offset: Offset(10, 10),
-              blurRadius: 6,
-              spreadRadius: 10,
-            )
-          ],
           borderRadius: BorderRadius.all(
             Radius.circular(6),
           ),
