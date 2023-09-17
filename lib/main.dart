@@ -1,9 +1,39 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:taller/src/presentation/complete_profile/complete_profile.dart';
+import 'package:taller/src/presentation/login/login_page.dart';
+import 'package:taller/src/presentation/register/register_page.dart';
+import 'package:taller/src/presentation/root/root_page.dart';
+import 'package:taller/src/presentation/splash/splah_page.dart';
+import 'package:taller/src/presentation/widgets/widgets.dart';
+import 'package:taller/src/utils/utils.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
+  final supabase = await Supabase.initialize(
+    url: dotenv.get('SUPABASE_URL'),
+    anonKey: dotenv.get('SUPABASE_KEY'),
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+    ),
+  );
+
+  SystemChrome.setPreferredOrientations(
+    const [
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ],
+  );
+
+  getIt.registerSingleton(supabase.client);
+
   runApp(const MyApp());
 }
 
@@ -14,110 +44,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: false,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var contador = 0;
-
-  void sumar() => setState(() => contador++);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.home),
-        title: const Text("App 2 "),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        actions: [
-          CupertinoButton(
-            onPressed: sumar,
-            child: const Icon(
-              Icons.plus_one,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 700,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    50,
-                    (index) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      width: 32,
-                      height: 32,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 64,
-            ),
-            MiComponente(
-              label: 'El contador es: $contador',
-              onTap: sumar,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MiComponente extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const MiComponente({
-    Key? key,
-    required this.label,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF1E415F),
-          borderRadius: BorderRadius.all(
-            Radius.circular(6),
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-        child: Text(
-          label,
-          style: const TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-        ),
-      ),
+      theme: AppTheme.theme,
+      initialRoute: '/splash',
+      routes: {
+        '/': (ctx) => const RootPage(),
+        '/splash': (ctx) => const SplashPage(),
+        '/login': (ctx) => const LoginPage(),
+        '/signup': (context) => const RegisterPage(),
+        '/completeProfile': (context) => const CompleteProfile()
+      },
+      // home: const HomePage(),
     );
   }
 }
