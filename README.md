@@ -78,3 +78,8 @@ ALTER FUNCTION "public"."handle_new_user"() OWNER TO "postgres";
 1. En el menu, agregar una entrada que nos lleve a nuestro perfil.
 
 2. Crear una pantalla que nos permita editar el perfil del usuario
+
+![simulator_screenshot_7514328C-AB73-4F59-BCB7-DF8F657C8F22](https://github.com/unacorbatanegra/taller/assets/44511181/b172df8a-db06-48b9-83d5-6346ab95c85a)
+
+
+
