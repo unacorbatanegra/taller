@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taller/src/presentation/complete_profile/complete_profile.dart';
+import 'package:taller/src/presentation/conversation/conversation_page.dart';
 import 'package:taller/src/presentation/login/login_page.dart';
 import 'package:taller/src/presentation/register/register_page.dart';
 import 'package:taller/src/presentation/root/root_page.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/splash': (ctx) => const SplashPage(),
         '/login': (ctx) => const LoginPage(),
         '/signup': (context) => const RegisterPage(),
+        '/conversation': (context) => const ConversationPage(),
         '/completeProfile': (context) => const CompleteProfile()
       },
       // home: const HomePage(),

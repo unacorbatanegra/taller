@@ -19,6 +19,7 @@ class Conversation {
     this.preview = '',
     this.unread = 0,
   });
+  
   factory Conversation.create({
     String title = '',
     required List<String> participants,
