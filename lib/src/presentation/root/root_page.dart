@@ -1,3 +1,4 @@
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taller/src/presentation/conversations/conversations_page.dart';
@@ -6,6 +7,7 @@ import 'package:taller/src/utils/utils.dart';
 
 import '../widgets/widgets.dart';
 
+@FFRoute(name: '/app', routeName: '/app')
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
 

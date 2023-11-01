@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taller/src/presentation/widgets/widgets.dart';
+import 'package:taller/src/routes/taller_routes.dart';
 
 import '../../utils/utils.dart';
 
@@ -19,6 +20,15 @@ class _MenuPageState extends State<MenuPage> {
       appBar: AppBar(
         title: const Text('Menu'),
       ),
+      body: Column(
+        children: [
+          ListTile(
+            onTap: onProfile,
+            leading: const Icon(Icons.person),
+            title: const Text('Perfil'),
+          ),
+        ],
+      ),
       bottomNavigationBar: ListTile(
         onTap: onSignOut,
         leading: const Icon(Icons.logout),
@@ -26,6 +36,7 @@ class _MenuPageState extends State<MenuPage> {
       ),
     );
   }
+
   void onSignOut() async {
     try {
       context.showPreloader();
@@ -39,4 +50,6 @@ class _MenuPageState extends State<MenuPage> {
     if (!mounted) return;
     Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
   }
+
+  void onProfile() => Navigator.of(context).pushNamed(RouteName.profile);
 }

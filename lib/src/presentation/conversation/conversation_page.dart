@@ -1,3 +1,4 @@
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taller/src/models/models.dart';
@@ -7,6 +8,7 @@ import 'package:taller/src/utils/utils.dart';
 
 import '../widgets/widgets.dart';
 
+@FFRoute(name: '/conversation')
 class ConversationPage extends StatefulWidget {
   const ConversationPage({super.key});
 
@@ -44,7 +46,7 @@ class _ConversationPageState extends State<ConversationPage> {
     await Future.delayed(Duration.zero);
 
     if (!mounted) return;
-    final args = ModalRoute.of(context)?.settings.arguments;
+    final args = (ModalRoute.of(context)?.settings.arguments as Map?)!['data'];
     if (args is! Conversation) {
       context.showErrorSnackBar(
         message: 'Hubo un error al obtener la conversación',

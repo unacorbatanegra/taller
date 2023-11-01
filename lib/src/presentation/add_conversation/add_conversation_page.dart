@@ -1,3 +1,4 @@
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,14 +8,16 @@ import '../../models/models.dart';
 import '../../utils/utils.dart';
 import '../widgets/widgets.dart';
 
-class UsersPage extends StatefulWidget {
-  const UsersPage({super.key});
+
+@FFRoute(name: '/addConversation')
+class AddUserPage extends StatefulWidget {
+  const AddUserPage({super.key});
 
   @override
-  State<UsersPage> createState() => _UsersPageState();
+  State<AddUserPage> createState() => _AddUserPageState();
 }
 
-class _UsersPageState extends State<UsersPage> {
+class _AddUserPageState extends State<AddUserPage> {
   late Future<List<Profile>> future;
 
   final participants = <String>{};
@@ -168,7 +171,7 @@ class _UsersPageState extends State<UsersPage> {
       if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(
         '/conversation',
-        arguments: c,
+        arguments: {'data': c},
       );
     } on Exception catch (e) {
       if (!mounted) return;

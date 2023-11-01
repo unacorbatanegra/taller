@@ -1,9 +1,11 @@
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../utils/utils.dart';
 import '../widgets/widgets.dart';
 
+@FFRoute(name: '/completeProfile')
 class CompleteProfile extends StatefulWidget {
   const CompleteProfile({super.key});
 

@@ -1,7 +1,9 @@
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taller/src/utils/utils.dart';
 
+@FFRoute(name: '/splash')
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -21,6 +23,8 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.of(context).pushNamedAndRemoveUntil('/login', (v) => false);
       return;
     }
+
+    // supabase.auth.signOut();
 
     if (!(session.user.userMetadata?.containsKey('profile_completed') ??
         false)) {

@@ -83,10 +83,10 @@ class _ConversationsPageState extends State<ConversationsPage> {
 
   void addConversation() => showCupertinoModalPopup(
         context: context,
-        builder: (ctx) => const UsersPage(),
+        builder: (ctx) => const AddUserPage(),
       );
 
   void onTap(Conversation item) {
-    Navigator.of(context).pushNamed('/conversation', arguments: item);
+    Navigator.of(context).pushNamed('/conversation', arguments: {'data': item});
   }
 }
